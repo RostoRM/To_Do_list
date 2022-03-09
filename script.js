@@ -1,9 +1,9 @@
 //Cashing DOM
-const enterBtn = document.getElementById('enter');
-const ColorBtn = document.getElementById('backColorBtn');
+const enterBtn = document.getElementById("enter");
+const ColorBtn = document.getElementById("backColorBtn");
 const deleteBtn_div = document.getElementsByClassName(`deleteBtn`);
-const input = document.getElementById('userinput');
-const ul = document.querySelector('#shopping_list__items');
+const input = document.getElementById("userinput");
+const ul = document.querySelector("#shopping_list__items");
 const body = document.getElementsByClassName(`gradient`);
 
 //Create function to toggle li elements with .done class/
@@ -22,7 +22,7 @@ const createListElement = () => {
   let div = document.createElement(`div`);
   ul.appendChild(div);
 
-  let li = document.createElement('li');
+  let li = document.createElement("li");
   li.appendChild(document.createTextNode(input.value));
   div.appendChild(li);
   input.value = ``;
@@ -52,8 +52,8 @@ const addListAfterKeypress = (event) => {
 };
 // random color function
 const randomColor = () => {
-  let letters = '0123456789ABCDEF';
-  let color = '#';
+  let letters = "0123456789ABCDEF";
+  let color = "#";
   for (let i = 0; i < 6; i++) {
     color += letters[Math.floor(Math.random() * 16)];
   }
@@ -63,15 +63,16 @@ const randomColor = () => {
 const showRendomColor = () => {
   let rgbvalue1 = randomColor();
   let rgbvalue2 = randomColor();
-  // const rgbvalue3 = randomColor();
-
   let RgbColorProperty = `linear-gradient(to right,${rgbvalue1},${rgbvalue2})`;
+
   for (const allbody of body) {
     allbody.style.background = RgbColorProperty;
   }
+
   for (const allDltBtn of deleteBtn_div) {
     allDltBtn.style.background = RgbColorProperty;
   }
+
   enterBtn.style.background = RgbColorProperty;
   ColorBtn.style.background = RgbColorProperty;
   input.style.background = RgbColorProperty;
@@ -84,17 +85,13 @@ const main = () => {
     this.parentElement.remove();
   }
 
-  for (let i = 0; i < deleteBtn_div.length; i++) {
-    let clickOnDltButton = deleteBtn_div[i];
-    clickOnDltButton.addEventListener('click', deleteShoppingList, false);
+  for (const btn of deleteBtn_div) {
+    btn.addEventListener("click", deleteShoppingList);
   }
 
   enterBtn.addEventListener(`click`, addListAfterClick);
-
   input.addEventListener(`keypress`, addListAfterKeypress);
-
   ul.addEventListener(`click`, toggleDoneClass);
-
   ColorBtn.addEventListener(`click`, showRendomColor);
 };
 
