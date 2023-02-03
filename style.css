@@ -1,90 +1,129 @@
+@import url('https://fonts.googleapis.com/css2?family=Karla:wght@400;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rampart+One&display=swap');
+
 *,
 *::before,
 *::after {
   box-sizing: border-box;
 }
-body {
-  background-image: linear-gradient(
-    to right,
-    rgb(29, 102, 198),
-    rgb(184, 79, 95),
-    rgb(72, 17, 218)
-  );
 
+body {
+  background: whitesmoke;
   margin: 0;
   padding: 0;
 }
 
-img {
-  max-width: 100%;
-  height: auto;
-  /* object-fit: cover; */
-  opacity: 0.4;
-}
-button {
-  margin-left: 2em;
-  margin-top: 0.5em;
-}
-ul {
-  list-style: none;
-}
-li {
-  font-size: 1.9rem;
-}
-
-.main_container {
-  /* width: 75%; 
-  max-width: 1100; */
-  margin: 0 auto;
-  display: flex;
-  /* justify-content: space-between; */
-}
-
-.primary_section {
-  margin-top: 3em;
-  margin-left: 5em;
-  /* background: linear-gradient(to right red, green, blue); */
-  width: 40%;
-}
-.aside_contaier {
-  margin-top: 3em;
-  width: 60%;
-}
-
-.flex {
-  display: flex;
+.done {
+  text-decoration-line: line-through;
+  text-decoration-thickness: 0.2rem;
+  text-decoration-color: rgb(234, 72, 23);
 }
 
 .main_title {
-  font-size: 2.8rem;
+  font-family: 'Rampart One', cursive;
+  font-size: 5rem;
   text-align: center;
-  color: rgba(251, 227, 249, 0.911);
+  color: #000;
+  margin-top: 0;
+  margin-bottom: 2rem;
 }
-.second_title {
-  text-align: center;
-  color: rgba(251, 227, 249, 0.719);
+
+.primary_section {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.action_elements {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+}
+
+.list-items {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 3rem;
+}
+
+.userinput {
+  font-family: 'Karla', sans-serif;
+  font-weight: 800;
+  font-size: 1.2rem;
+  text-decoration: none;
+  color: black;
+  background: #e7e7e7;
+  cursor: pointer;
+  border: 3px solid;
+  padding: 0.3em 0;
+  width: 350px;
+  box-shadow: 1px 1px 0px 0px, 2px 2px 0px 0px, 3px 3px 0px 0px, 4px 4px 0px 0px, 5px 5px 0px 0px;
+  position: relative;
+  touch-action: manipulation;
+  outline: none;
+}
+
+.clear-Btn {
+  font-family: 'Karla', sans-serif;
+  font-weight: 800;
+  font-size: 1.2rem;
+  letter-spacing: 2px;
+  text-decoration: none;
+  text-transform: uppercase;
+  color: var(--primary-color);
+  cursor: pointer;
+  border: 3px solid;
+  padding: 0.3em 0.5em;
+  box-shadow: 1px 1px 0px 0px, 2px 2px 0px 0px, 3px 3px 0px 0px, 4px 4px 0px 0px, 5px 5px 0px 0px;
+  position: relative;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.clear-Btn:active {
+  box-shadow: 0px 0px 0px 0px;
+  top: 5px;
+  left: 5px;
+}
+
+.flex {
+  width: 35%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.li_list {
+  font-family: 'Karla', sans-serif;
   font-size: 1.9rem;
+  font-weight: 800;
 }
 
-.done {
-  text-decoration: line-through;
+.done-Btn {
+  font-family: 'Karla', sans-serif;
+  font-weight: 800;
+  font-size: 1.2rem;
+  letter-spacing: 2px;
+  text-decoration: none;
+  text-transform: uppercase;
+  color: var(--primary-color);
+  cursor: pointer;
+  border: 3px solid;
+  padding: 0.3em 0.5em;
+  margin-top: 0.6em;
+  box-shadow: 1px 1px 0px 0px, 2px 2px 0px 0px, 3px 3px 0px 0px, 4px 4px 0px 0px, 5px 5px 0px 0px;
+  position: relative;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
 }
 
-#enter,
-#backColorBtn,
-#userinput,
-.deleteBtn {
-  border: none;
-  background-image: linear-gradient(
-    to right,
-    rgb(184, 79, 95),
-    rgb(72, 17, 218)
-  );
-  padding: 0.5em 1em;
-  border: 3px solid pink;
-  border-radius: 100px;
-  font-size: 1rem;
-}
-#userinput {
-  margin-left: 2.5em;
+.done-Btn:active {
+  box-shadow: 0px 0px 0px 0px;
+  top: 5px;
+  left: 5px;
 }

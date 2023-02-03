@@ -1,98 +1,63 @@
 //Cashing DOM
-const enterBtn = document.getElementById("enter");
-const ColorBtn = document.getElementById("backColorBtn");
-const deleteBtn_div = document.getElementsByClassName(`deleteBtn`);
-const input = document.getElementById("userinput");
-const ul = document.querySelector("#shopping_list__items");
-const body = document.getElementsByClassName(`gradient`);
+const form = document.querySelector('form');
+const clearBtn = document.getElementById('clearBtn');
+const doneBtn = document.getElementsByClassName('done-Btn');
+const input = document.getElementById('userinput');
+const ol = document.getElementById('toDoList');
 
-//Create function to toggle li elements with .done class/
-const toggleDoneClass = (e) => {
-  const trgt = e.target.closest(`li`);
-  if (trgt) trgt.classList.toggle(`done`);
-};
+let itemsArray = localStorage.getItem('items') ? JSON.parse(localStorage.getItem('items')) : [];
 
-//Accessing input element Value /
-const inputLength = () => {
-  return input.value.length;
-};
+localStorage.setItem('items', JSON.stringify(itemsArray));
+const data = JSON.parse(localStorage.getItem('items'));
 
-//Create and Append elements,add classes. Execution of main(delete) function inside of createListElement()/
-const createListElement = () => {
-  let div = document.createElement(`div`);
-  ul.appendChild(div);
-
-  let li = document.createElement("li");
-  li.appendChild(document.createTextNode(input.value));
+//Create and Append elements,add classes
+const createListElement = (text) => {
+  // Create Div Element
+  const div = document.createElement('div');
+  div.classList.add('flex');
+  // Create li Element
+  const li = document.createElement('li');
+  li.classList.add('li_list');
+  li.textContent = text;
+  // Create button Element
+  const button = document.createElement('button');
+  button.classList.add('done-Btn');
+  button.textContent = 'Done';
+  // Append Elements
   div.appendChild(li);
-  input.value = ``;
-
-  let delbtn = document.createElement(`button`);
-  delbtn.appendChild(document.createTextNode(`Delete Button`));
-  div.appendChild(delbtn);
-
-  div.classList.add(`flex`);
-  delbtn.classList.add(`deleteBtn`);
-  li.classList.add(`li_listItem`);
-
-  main();
+  div.appendChild(button);
+  ol.appendChild(div);
 };
 
-//Create above elements if inputLength is > 0  with mouse click
-const addListAfterClick = () => {
-  if (inputLength() > 0) {
-    createListElement();
-  }
-};
-//Create above elements if inputLength is > 0  with enter key
-const addListAfterKeypress = (event) => {
-  if (inputLength() > 0 && event.keyCode === 13) {
-    createListElement();
-  }
-};
-// random color function
-const randomColor = () => {
-  let letters = "0123456789ABCDEF";
-  let color = "#";
-  for (let i = 0; i < 6; i++) {
-    color += letters[Math.floor(Math.random() * 16)];
-  }
-  return color;
-};
-// show Rendom Colors on backgrounds
-const showRendomColor = () => {
-  let rgbvalue1 = randomColor();
-  let rgbvalue2 = randomColor();
-  let RgbColorProperty = `linear-gradient(to right,${rgbvalue1},${rgbvalue2})`;
+// to show items elements after closing browser
+data.forEach((item) => {
+  createListElement(item);
+});
 
-  for (const allbody of body) {
-    allbody.style.background = RgbColorProperty;
-  }
-
-  for (const allDltBtn of deleteBtn_div) {
-    allDltBtn.style.background = RgbColorProperty;
-  }
-
-  enterBtn.style.background = RgbColorProperty;
-  ColorBtn.style.background = RgbColorProperty;
-  input.style.background = RgbColorProperty;
+// Hanlde Data from Form
+const storeItems = (e) => {
+  e.preventDefault();
+  itemsArray.push(input.value);
+  localStorage.setItem('items', JSON.stringify(itemsArray));
+  createListElement(input.value);
+  input.value = '';
 };
 
-//Executiing  DeleteFunction,which deletes elements and main Function which executes eventListeners /
-
-const main = () => {
-  function deleteShoppingList() {
-    this.parentElement.remove();
+//clear localStorage and list items
+const deleteItems = () => {
+  localStorage.clear();
+  while (ol.firstChild) {
+    ol.removeChild(ol.firstChild);
   }
-
-  for (const btn of deleteBtn_div) {
-    btn.addEventListener("click", deleteShoppingList);
-  }
-
-  enterBtn.addEventListener(`click`, addListAfterClick);
-  input.addEventListener(`keypress`, addListAfterKeypress);
-  ul.addEventListener(`click`, toggleDoneClass);
-  ColorBtn.addEventListener(`click`, showRendomColor);
 };
 
-main();
+// Toggle done class on each button click
+for (let i = 0; i < doneBtn.length; i++) {
+  const Btn = doneBtn[i];
+  Btn.addEventListener('click', () => {
+    Btn.previousElementSibling.classList.toggle('done');
+  });
+}
+
+form.addEventListener('submit', storeItems);
+clearBtn.addEventListener('click', deleteItems);
