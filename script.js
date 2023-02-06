@@ -10,6 +10,12 @@ let itemsArray = localStorage.getItem('items') ? JSON.parse(localStorage.getItem
 localStorage.setItem('items', JSON.stringify(itemsArray));
 const data = JSON.parse(localStorage.getItem('items'));
 
+// Create function to toggle li elements with .done class/
+const toggleDoneClass = (e) => {
+  const trgt = e.target.closest(`li`);
+  if (trgt) trgt.classList.toggle(`done`);
+};
+
 //Create and Append elements,add classes
 const createListElement = (text) => {
   // Create Div Element
@@ -19,13 +25,8 @@ const createListElement = (text) => {
   const li = document.createElement('li');
   li.classList.add('li_list');
   li.textContent = text;
-  // Create button Element
-  const button = document.createElement('button');
-  button.classList.add('done-Btn');
-  button.textContent = 'Done';
   // Append Elements
   div.appendChild(li);
-  div.appendChild(button);
   ol.appendChild(div);
 };
 
@@ -51,13 +52,6 @@ const deleteItems = () => {
   }
 };
 
-// Toggle done class on each button click
-for (let i = 0; i < doneBtn.length; i++) {
-  const Btn = doneBtn[i];
-  Btn.addEventListener('click', () => {
-    Btn.previousElementSibling.classList.toggle('done');
-  });
-}
-
 form.addEventListener('submit', storeItems);
 clearBtn.addEventListener('click', deleteItems);
+ol.addEventListener('click', toggleDoneClass);
